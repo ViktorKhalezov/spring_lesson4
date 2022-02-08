@@ -10,28 +10,33 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class AppService {
 
-    private final ProductRepository productRepository;
+    private final JpaProductDao jpaProductDao;
 
 
     public Product saveProduct(Product product) {
-        return productRepository.saveProduct(product);
+        return jpaProductDao.save(product);
     }
 
 
-    public Product getProductById(Integer id) {
-        return productRepository.getProductById(id).orElseThrow(NoSuchElementException::new);
+    public Product getProductById(Long id) {
+        try {
+            return jpaProductDao.findById(id);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.getAllProducts();
+        return (List<Product>) jpaProductDao.findAll();
     }
 
     public Product editProduct(Product product) {
-       return productRepository.editProduct(product);
+       return jpaProductDao.save(product);
     }
 
-    public void deleteById(Integer id) {
-        productRepository.deleteById(id);
+    public void deleteById(Long id) {
+        jpaProductDao.deleteById(id);
     }
 
 }
