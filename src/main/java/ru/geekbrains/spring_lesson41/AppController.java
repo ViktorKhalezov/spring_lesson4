@@ -41,20 +41,20 @@ public class AppController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public String getProductById(Model model, @PathVariable Integer id) {
+    public String getProductById(Model model, @PathVariable Long id) {
         Product product = appService.getProductById(id);
         model.addAttribute("product", product);
         return "product-view";
     }
 
     @RequestMapping(path = "/delete", method = RequestMethod.GET)
-    public String deleteById(@RequestParam Integer id) {
+    public String deleteById(@RequestParam Long id) {
         appService.deleteById(id);
         return "redirect:/products";
     }
 
     @RequestMapping(path = "/edit", method = RequestMethod.GET)
-    public String editById(Model model, @RequestParam Integer id) {
+    public String editById(Model model, @RequestParam Long id) {
            Product product = appService.getProductById(id);
            model.addAttribute("product", product);
            return "create-form";

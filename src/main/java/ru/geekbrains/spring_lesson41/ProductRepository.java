@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class ProductRepository {
     private int count = 0;
 
@@ -15,7 +15,7 @@ public class ProductRepository {
 
 
     public Product saveProduct(Product product) {
-        product.setId(count++);
+      //  product.setId(count++);
         products.add(product);
         return Product.builder()
                 .id(product.getId())
@@ -37,9 +37,9 @@ public class ProductRepository {
         return new ArrayList<>(products);
     }
 
-    public Product editProduct(Product product) {
-       return products.set(product.getId(), product);
-    }
+//    public Product editProduct(Product product) {
+//       return products.set(product.getId(), product);
+//    }
 
     public void deleteById(Integer id) {
         if(id < products.size()) {

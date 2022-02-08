@@ -10,6 +10,8 @@
         <h2>Product id: ${product.id}</h2>
         <h2>Product title: ${product.title}</h2>
         <h2>Product cost: ${product.cost}</h2>
+        <h2>Product manufacture date: ${product.date}</h2>
+        <h2>Product manufacturer: ${product.manufacturer}</h2>
 
         <c:url var="editUrl" value="/products/edit">
             <c:param name="id" value="${product.id}"/>
