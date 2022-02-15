@@ -1,10 +1,11 @@
-package ru.geekbrains.spring_lesson41;
+package ru.geekbrains.spring_lesson4;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -20,9 +21,10 @@ import java.util.Properties;
 
 
 @Configuration
-@ComponentScan("ru.geekbrains.spring_lesson41")
+@ComponentScan("ru.geekbrains.spring_lesson4")
 @EnableTransactionManagement
 @PropertySource("classpath:hibernate.properties")
+@EnableJpaRepositories(basePackages = "ru.geekbrains.spring_lesson4")
 public class JpaConfig {
     @Value("${driverClassName}")
     private String driverClassName;
@@ -65,7 +67,7 @@ public class JpaConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("ru.geekbrains.spring_lesson41");
+        factoryBean.setPackagesToScan("ru.geekbrains.spring_lesson4");
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(hibernateProperties());
@@ -83,4 +85,5 @@ public class JpaConfig {
     public JpaVendorAdapter jpaVendorAdapter() {
         return new HibernateJpaVendorAdapter();
     }
+
 }

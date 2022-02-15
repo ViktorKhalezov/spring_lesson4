@@ -1,8 +1,7 @@
-package ru.geekbrains.spring_lesson41;
+package ru.geekbrains.spring_lesson4;
 
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,19 +27,19 @@ public class Manufacturer {
     @Column(name = "name")
     private String name;
 
-
     @OneToMany(mappedBy = "manufacturer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Product> products;
+
+
+    public Manufacturer(String name) {
+        this.name = name;
+    }
 
     public boolean addProduct(Product product) {
         if (products == null) {
             products = new HashSet<>();
         }
         return products.add(product);
-    }
-
-    public Manufacturer(String name) {
-        this.name = name;
     }
 
 

@@ -8,6 +8,17 @@
     </head>
     <body>
         <h1>Product List</h1>
+        <h3>Sort By Price:<h3>
+        <c:url var="ascUrl" value="/products">
+            <c:param name="sort" value="asc"/>
+        </c:url>
+        <a href="${ascUrl}">Low to High</a>
+        <br>
+        <c:url var="descUrl" value="/products">
+            <c:param name="sort" value="desc"/>
+        </c:url>
+        <a href="${descUrl}">High To Low</a>
+        <br>
         <ul>
            <c:forEach var="product" items="${products}">
             <c:url var="viewUrl" value="/products/${product.id}"/>

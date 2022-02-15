@@ -1,4 +1,4 @@
-package ru.geekbrains.spring_lesson41;
+package ru.geekbrains.spring_lesson4;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -26,17 +27,23 @@ public class AppController {
 
     @RequestMapping(path = "/form", method = RequestMethod.POST)
     public String fillForm(Product product) {
-        if(product.getId() == null) {
-            appService.saveProduct(product);
-        } else {
-            appService.editProduct(product);
-        }
+        appService.saveProduct(product);
         return "redirect:/products";
     }
 
+
     @RequestMapping
-    public String getAllProducts(Model model) {
-        model.addAttribute("products", appService.getAllProducts());
+    public String getAllProducts(Model model, @RequestParam(required = false) String sort) {
+        try {
+            if (sort.equals("asc")) {
+                model.addAttribute("products", appService.getProductsSortedAsc());
+            }
+            if (sort.equals("desc")) {
+                model.addAttribute("products", appService.getProductsSortedDesc());
+            }
+        } catch(NullPointerException e) {
+            model.addAttribute("products", appService.getAllProducts());
+        }
         return "product-list";
     }
 
@@ -59,5 +66,6 @@ public class AppController {
            model.addAttribute("product", product);
            return "create-form";
     }
+
 
 }

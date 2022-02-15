@@ -1,8 +1,7 @@
-package ru.geekbrains.spring_lesson41;
+package ru.geekbrains.spring_lesson4;
 
 import javax.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -36,6 +35,10 @@ public class Product {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
+    @Version
+    @Column(name = "VERSION")
+    private int version;
+
 
     public Product(Long id, String title, BigDecimal cost, LocalDate date, String name) {
         this.id = id;
@@ -45,6 +48,7 @@ public class Product {
         this.manufacturer = new Manufacturer(name);
     }
 
+
     @Override
     public String toString() {
         return "Product{" +
@@ -52,9 +56,11 @@ public class Product {
                 ", title = '" + title + '\'' +
                 ", cost = " + cost +
                 ", date = " + date +
-                ", manufacturer = '" + manufacturer.getName() + '\'' +
+                ", manufacturer = '" + manufacturer + '\'' +
                 '}';
     }
+
+
 }
 
 
