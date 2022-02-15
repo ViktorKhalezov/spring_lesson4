@@ -16,7 +16,7 @@
         <br>
         Manufacture Date: <form:input path="date"/>
         <br>
-        Manufacturer: <form:input path="manufacturer"/>
+        Manufacturer: <form:input path="manufacturer.name"/>
         <br>
         <input type="submit" value="Save"/>
         </form:form>
